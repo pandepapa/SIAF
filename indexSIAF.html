@@ -31,14 +31,37 @@
             line-height: 1.6;
         }
 
-        /* Header & Navigation */
+        /* BARRA INSTITUCIONAL DE LOGOS (SUPERIOR) */
+        .institutional-bar {
+            background-color: var(--white);
+            padding: 12px 5%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .institutional-bar img {
+            height: 60px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.2s;
+        }
+
+        .institutional-bar img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Header & Navigation (DEBAJO DE LOS LOGOS) */
         header {
             background-color: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
+            position: sticky;
             top: 0;
-            left: 0;
+            width: 100%;
             z-index: 1000;
         }
 
@@ -106,10 +129,8 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135px, rgba(38, 50, 56, 0.95), rgba(27, 94, 32, 0.85)), 
-                        url('https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&q=80&w=1200') no-repeat center center/cover;
-            color: var(--white);
-            padding: 160px 20px 100px 20px;
+            background-color: var(--light);
+            padding: 80px 20px;
             text-align: center;
         }
 
@@ -121,15 +142,16 @@
         .hero h1 {
             font-size: 42px;
             margin-bottom: 20px;
-            line-height: 1.2;
+            line-height: 1.25;
             color: var(--dark);
+            font-weight: 800;
         }
 
         .hero p {
             font-size: 18px;
             margin-bottom: 35px;
-            opacity: 0.9;
-            color: var(--dark);
+            color: #455A64;
+            line-height: 1.6;
         }
 
         .hero-buttons {
@@ -143,30 +165,16 @@
             background-color: var(--secondary);
             color: var(--white);
             text-decoration: none;
-            padding: 12px 25px;
+            padding: 12px 28px;
             border-radius: 5px;
             font-weight: 600;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
+            display: inline-block;
         }
 
         .btn-secondary:hover {
             background-color: var(--secondary-dark);
-        }
-
-        .btn-outline {
-            background-color: var(--secondary);
-            color: var(--white);
-            text-decoration: none;
-            padding: 12px 25px;
-            border: 2px solid var(--white);
-            border-radius: 5px;
-            font-weight: 600;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .btn-outline:hover {
-            background-color: var(--white);
-            color: var(--dark);
+            transform: translateY(-2px);
         }
 
         /* Problem & Opportunity Section */
@@ -206,7 +214,7 @@
 
         .grid-2 {
             display: grid;
-            grid-template-columns: 1xl;
+            grid-template-columns: 1fr;
             gap: 30px;
             margin-top: 40px;
         }
@@ -421,7 +429,7 @@
             font-weight: 500;
         }
 
-        .form-group input, .form-group select, .form-group textarea {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 12px;
             border: 1px solid var(--border);
@@ -431,7 +439,7 @@
             transition: border-color 0.3s;
         }
 
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+        .form-group input:focus, .form-group select:focus {
             border-color: var(--primary);
         }
 
@@ -470,11 +478,34 @@
             color: var(--secondary);
             text-decoration: none;
         }
+
+        @media (max-width: 768px) {
+            .institutional-bar {
+                gap: 15px;
+                padding: 10px 3%;
+            }
+            .institutional-bar img {
+                height: 45px;
+            }
+            .hero {
+                padding: 50px 20px;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header / Navbar -->
+    <!-- 1. BARRA INSTITUCIONAL DE LOGOS (SUPERIOR) -->
+    <div class="institutional-bar">
+        <img src="tecnm.png" alt="TecNM Logo">
+        <img src="itvm.png" alt="ITVM Logo">
+        <img src="innova.png" alt="InnovaTecNM 2026 Logo">
+    </div>
+
+    <!-- 2. NAVEGACIÓN PRINCIPAL -->
     <header>
         <div class="navbar">
             <a href="#" class="logo">SIAF-<span>AGAVE</span></a>
@@ -635,7 +666,7 @@
                 </div>
                 <div class="metric-item">
                     <h3>6</h3>
-                    <p>6 cartas de colaboración e interés documentadas  "no constituyen ventas"</p>
+                    <p>6 cartas de colaboración e interés documentadas "no constituyen ventas"</p>
                 </div>
                 <div class="metric-item">
                     <h3>100%</h3>
@@ -649,37 +680,53 @@
         </div>
     </section>
 
-    <!-- Contact section -->
+    <!-- Contact section (Envío silencioso conectado al nuevo Google Form) -->
     <section id="contacto" style="background-color: var(--white);">
         <div class="container">
             <h2 class="section-title">Inicia tu Diagnóstico Agroindustrial Gratuito</h2>
             <p class="section-subtitle">Completa el formulario para evaluar tu volumen de residuos y sugerirte el mejor plan de implementación.</p>
             
             <div class="contact-box">
-                <form action="#" method="POST" onsubmit="alert('¡Gracias por tu interés! Nos comunicaremos contigo a la brevedad.'); return false;">
+                <!-- Iframe oculto para capturar la respuesta sin salir del sitio -->
+                <iframe name="hidden_siaf_iframe" id="hidden_siaf_iframe" style="display:none;" onload="if(submittedSiaf) { showSiafSuccess(); }"></iframe>
+
+                <form id="siafForm" 
+                      action="https://docs.google.com/forms/d/e/1FAIpQLScQViSGNpQ9rcwpOfUHh0bOY0yA4ai9E500LM_1bADOIjG7Pw/formResponse" 
+                      method="POST" 
+                      target="hidden_siaf_iframe" 
+                      onsubmit="submittedSiaf=true;">
+
                     <div class="form-group">
                         <label for="nombre">Nombre Completo</label>
-                        <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+                        <input type="text" name="entry.1578362393" id="nombre" placeholder="Ej. Juan Pérez" required>
                     </div>
+
                     <div class="form-group">
                         <label for="empresa">Nombre de la unidad mezcalera / empresa / institución</label>
-                        <input type="text" id="empresa" placeholder="Ej. Mezcal Tradicional S.A." required>
+                        <input type="text" name="entry.1567159989" id="empresa" placeholder="Ej. Mezcal Tradicional S.A." required>
                     </div>
+
                     <div class="form-group">
                         <label for="residuo">¿Qué residuo generas en mayor volumen?</label>
-                        <select id="residuo" required>
+                        <select name="entry.1426450491" id="residuo" required>
                             <option value="">Selecciona una opción</option>
-                            <option value="bagazo">Bagazo de Agave</option>
-                            <option value="cafe">Borra de Café</option>
-                            <option value="rastrojo">Rastrojo de Chícharo / Agrícola</option>
-                            <option value="varios">Múltiples residuos lignocelulósicos</option>
+                            <option value="Vagazo de Agave">Bagazo de Agave</option>
+                            <option value="Borra de Café">Borra de Café</option>
+                            <option value="Rastrojo de Chícharo / Agrícola">Rastrojo de Chícharo / Agrícola</option>
+                            <option value="Multiples residuos lignocelulísicos">Múltiples residuos lignocelulósicos</option>
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label for="whatsapp">Teléfono / WhatsApp</label>
-                        <input type="tel" id="whatsapp" placeholder="Ej. 4431234567" required>
+                        <input type="tel" name="entry.1604465477" id="whatsapp" placeholder="Ej. 4431234567" required>
                     </div>
-                    <button type="submit" class="btn-submit">Enviar Solicitud de Diagnóstico Gratuito</button>
+
+                    <button type="submit" id="btnSiafSubmit" class="btn-submit">Enviar Solicitud de Diagnóstico Gratuito</button>
+                    
+                    <div id="msgConfirmacion" style="display:none; margin-top:15px; padding:12px; background-color:#E8F5E9; color:#2E7D32; border-radius:5px; text-align:center; font-weight:600;">
+                        ✓ ¡Solicitud recibida con éxito! Nos comunicaremos contigo a la brevedad.
+                    </div>
                 </form>
             </div>
         </div>
@@ -692,5 +739,16 @@
         <p style="font-size:12px; margin-top:15px; opacity:0.6;">Desarrollado en vinculación académica con el TecNM - Instituto Tecnológico del Valle de Morelia. Respaldado científicamente.</p>
     </footer>
 
+    <script>
+        let submittedSiaf = false;
+        function showSiafSuccess() {
+            document.getElementById('msgConfirmacion').style.display = 'block';
+            document.getElementById('siafForm').reset();
+            const btn = document.getElementById('btnSiafSubmit');
+            btn.disabled = true;
+            btn.innerText = "Solicitud Enviada ✔";
+            btn.style.backgroundColor = "#78909C";
+        }
+    </script>
 </body>
 </html>
