@@ -393,20 +393,38 @@
 
         .trust-metrics {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
             text-align: center;
             margin-top: 40px;
-        }
-
-        @media(min-width: 768px) {
-            .trust-metrics { grid-template-columns: repeat(3, 1fr); }
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .metric-item h3 {
             font-size: 36px;
             color: var(--primary);
             margin-bottom: 5px;
+        }
+
+        .trust-protection-block {
+            max-width: 800px;
+            margin: 40px auto 0;
+            text-align: center;
+        }
+
+        .trust-protection-block h3 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .trust-protection-block p {
+            font-size: 16px;
+            color: var(--dark);
+            line-height: 1.6;
         }
 
         /* Contact Form */
@@ -491,6 +509,9 @@
                 padding: 50px 20px;
             }
             .hero h1 {
+                font-size: 28px;
+            }
+            .metric-item h3, .trust-protection-block h3 {
                 font-size: 28px;
             }
         }
@@ -659,6 +680,7 @@
             <h2 class="section-title">Tecnología validada y protegida científico-legalmente</h2>
             <p class="section-subtitle">No es una idea experimental; es ciencia aplicada con respaldo institucional absoluto.</p>
             
+            <!-- Métricas superiores (TRL 5 y 6) -->
             <div class="trust-metrics">
                 <div class="metric-item">
                     <h3>TRL 5</h3>
@@ -666,12 +688,14 @@
                 </div>
                 <div class="metric-item">
                     <h3>6</h3>
-                    <p>6 cartas de colaboración e interés documentadas "no constituyen ventas"</p>
+                    <p>Cartas de colaboración e interés documentadas ("no constituyen ventas")</p>
                 </div>
-                <div class="metric-item">
-                    <h3>100%</h3>
-                    <p>Estrategia de protección: secreto industrial · marca mixta clases 31, 41 y 44 (solicitud proyectada) · derecho de autor</p>
-                </div>
+            </div>
+
+            <!-- Bloque de Estrategia de Protección con encabezado verde h3 -->
+            <div class="trust-protection-block">
+                <h3>Estrategia de protección:</h3>
+                <p>Secreto industrial · marca mixta clases 31, 41 y 44 (solicitud proyectada) · derecho de autor</p>
             </div>
             
             <p style="text-align: center; margin-top: 40px; color: var(--gray); font-size: 15px; font-style: italic;">
@@ -680,21 +704,20 @@
         </div>
     </section>
 
-    <!-- Contact section (Envío silencioso conectado al nuevo Google Form) -->
+    <!-- Contact section (Envío silencioso conectado al Google Form de SIAF) -->
     <section id="contacto" style="background-color: var(--white);">
         <div class="container">
             <h2 class="section-title">Inicia tu Diagnóstico Agroindustrial Gratuito</h2>
             <p class="section-subtitle">Completa el formulario para evaluar tu volumen de residuos y sugerirte el mejor plan de implementación.</p>
             
             <div class="contact-box">
-                <!-- Iframe oculto para capturar la respuesta sin salir del sitio -->
                 <iframe name="hidden_siaf_iframe" id="hidden_siaf_iframe" style="display:none;" onload="if(submittedSiaf) { showSiafSuccess(); }"></iframe>
 
                 <form id="siafForm" 
                       action="https://docs.google.com/forms/d/e/1FAIpQLScQViSGNpQ9rcwpOfUHh0bOY0yA4ai9E500LM_1bADOIjG7Pw/formResponse" 
                       method="POST" 
                       target="hidden_siaf_iframe" 
-                      onsubmit="submittedSiaf=true;">
+                      onsubmit="submittedSiaf=true;"[cite: 17]>
 
                     <div class="form-group">
                         <label for="nombre">Nombre Completo</label>
