@@ -566,12 +566,17 @@ footer a:hover{text-decoration:underline}
         <div class="form-head"><h3>Prediagnóstico SIAF-AGAVE</h3><p>3 pasos · menos de 2 minutos</p></div>
         <div class="form-body">
           <div class="stepper"><div class="sp on" id="bar1"></div><div class="sp" id="bar2"></div><div class="sp" id="bar3"></div></div>
-          <form id="siafForm" action="https://docs.google.com/forms/d/e/1FAIpQLScQViSGNpQ9rcwpOfUHh0bOY0yA4ai9E500LM_1bADOIjG7Pw/formResponse" method="POST" target="hiddenSiaf" onsubmit="submitted=true">
+          <form id="siafForm" action="https://docs.google.com/forms/d/e/1FAIpQLSeKfJVpBt3mFZdp9IC0fNHOJQLyxO3a2UbdQKEYzpDK5rcr-w/formResponse" method="POST" target="hiddenSiaf" onsubmit="submitted=true">
             <iframe name="hiddenSiaf" style="display:none" onload="if(submitted)successMsg()"></iframe>
-            <input type="hidden" name="entry.1578362393" id="gfNombre">
-            <input type="hidden" name="entry.1567159989" id="gfEmpresa">
-            <input type="hidden" name="entry.1426450491" id="gfResiduo">
-            <input type="hidden" name="entry.1604465477" id="gfTelefono">
+            <input type="hidden" name="entry.99754468" id="gfNombre">
+            <input type="hidden" name="entry.1538529814" id="gfEmpresa">
+            <input type="hidden" name="entry.1716601956" id="gfTelefono">
+            <input type="hidden" name="entry.1596987191" id="gfResiduo">
+            <input type="hidden" name="entry.895292585" id="gfCantidad">
+            <input type="hidden" name="entry.1437209002" id="gfPeriodicidad">
+            <input type="hidden" name="entry.1715723655" id="gfEspacio">
+            <input type="hidden" name="entry.304523100" id="gfServicios">
+            <input type="hidden" name="entry.2091249349" id="gfModalidad">
             <div class="fstep on" data-step="1">
               <div class="field"><label>¿Qué residuo tienes disponible?</label>
                 <select id="residuo" required><option value="">Selecciona</option><option>Bagazo de agave</option><option>Borra de café</option><option>Rastrojo de chícharo</option><option>Mezcla de residuos lignocelulósicos</option></select></div>
@@ -716,9 +721,14 @@ function prepareSubmit(){
   const serv=document.getElementById('servicios').value;
   const mod=document.getElementById('modalidad').value;
   document.getElementById('gfNombre').value=n;
-  document.getElementById('gfEmpresa').value=`${e} | Modalidad: ${mod} | Espacio: ${esp} m² | Servicios: ${serv}`;
-  document.getElementById('gfResiduo').value=`${r} | ${c} ${p}`;
+  document.getElementById('gfEmpresa').value=e;
   document.getElementById('gfTelefono').value=t;
+  document.getElementById('gfResiduo').value=r;
+  document.getElementById('gfCantidad').value=c;
+  document.getElementById('gfPeriodicidad').value=p;
+  document.getElementById('gfEspacio').value=esp;
+  document.getElementById('gfServicios').value=serv;
+  document.getElementById('gfModalidad').value=mod;
 }
 function successMsg(){if(!submitted)return;document.getElementById('success').style.display='block';}
 showStep();updateSummary();
